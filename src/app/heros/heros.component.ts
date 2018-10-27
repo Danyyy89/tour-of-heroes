@@ -16,8 +16,15 @@ export class HerosComponent implements OnInit {
     this.selectedHero = hero;
   }
 
-  getHeroes(): void {
+  // Without Observable in hero.service.ts
+  /*getHeroes(): void {
     this.heroes = this.heroService.getHeroes();
+  } */
+
+  // With Observable in hero.service.ts
+  getHeroes(): void {
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes);
   }
 
   constructor(private heroService: HeroService) {
