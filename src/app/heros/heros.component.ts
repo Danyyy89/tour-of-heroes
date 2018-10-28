@@ -11,10 +11,11 @@ import { HeroService } from '../hero.service';
 export class HerosComponent implements OnInit {
   heroes: Hero[];
 
+  /* No more need of these lines with the router
   selectedHero: Hero;
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
-  }
+  } */
 
   // Without Observable in hero.service.ts
   /*getHeroes(): void {

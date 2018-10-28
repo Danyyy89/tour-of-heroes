@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+// To set routable the HeroDetailComponent
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { HeroService } from '../hero.service';
 
 // Import the class Hero of Hero.ts
 import { Hero } from '../Hero';
@@ -12,9 +16,26 @@ import { Hero } from '../Hero';
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
 
-  constructor() { }
+  getHero(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.heroService.getHero(id)
+      .subscribe(hero => this.hero = hero);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  // Inject the three imported items saving their values into private fields
+  constructor(
+      // this can extract the id route parameter
+      private route: ActivatedRoute,
+      private heroService: HeroService,
+      private location: Location 
+    ) { }
 
   ngOnInit() {
+    this.getHero();
   }
 
 }
